@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
-
+import Load from './Load';
 export default function App() {
+  const API = 'https://api.publicapis.org/entries';
   const [details, setState] = useState([]);
   useEffect(() => {
-    fetch('https://api.publicapis.org/entries')
+    fetch(API)
       .then(data => data.json())
       .then(val => setState(val.entries));
   }, []);
@@ -12,38 +13,59 @@ export default function App() {
     return category.Category;
   });
   let uniqueCategories = [...new Set(Categories)];
-  const [pagin, setPagin] = useState(uniqueCategories[0]);
+  const [pagin, setPagin] = useState('LIST');
   return (
     <div className="m-4 p-2">
       <h1 style={{ textAlign: 'center' }}>API</h1>
-      {uniqueCategories.map(Category => {
-        return (
-          <>
-            <button
-              className="btn text-dark btn-outline-info m-1"
-              onClick={() => {
-                setPagin(Category);
-              }}
-            >
-              {Category}
-            </button>
-          </>
-        );
-      })}
-      {details.map(data => {
-        return (
-          <>
-            {data.Category === pagin && (
+      {uniqueCategories.length == 0 ? (
+        <Load className="mt-4" />
+      ) : (
+        <>
+          <h3
+            className="bg-light text-dark border border-2 p-3 m-4"
+            style={{ textAlign: 'center' }}
+          >
+            Choose the Topic
+          </h3>
+          {uniqueCategories.map(Category => {
+            return (
               <>
-                <h3 key={data.API}>{data.API}</h3>
-                <h5 key={data.API}>
-                  {data.Description} & <a href={data.Link}>{data.Category}</a>
-                </h5>
+                <button
+                  className="btn text-dark btn-outline-info m-1"
+                  onClick={() => {
+                    setPagin(Category);
+                  }}
+                >
+                  {Category}
+                </button>
               </>
+            );
+          })}
+          <div style={{ margin: '0% 10%' }} className="mt-5">
+            <h2 className=" text-success p-3 bg-light">{pagin + ' ↓'}</h2>
+            {pagin !== 'LIST' && (
+              <div className=" border border-1 p-4 ">
+                {details.map(data => {
+                  return (
+                    <>
+                      {data.Category === pagin && (
+                        <>
+                          <h4 key={data.API}>{data.API}</h4>
+                          <h5 key={data.API}>
+                            {data.Description} <br />
+                            LINK : <a href={data.Link}>{data.Category}</a>
+                          </h5>
+                          <hr />
+                        </>
+                      )}
+                    </>
+                  );
+                })}
+              </div>
             )}
-          </>
-        );
-      })}
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -1,3 +1,46 @@
-body{
+body {
   font-family: Lato;
+}
+.container1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box1 {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  animation: asheffects 2s ease infinite;
+}
+@keyframes asheffects {
+  0% {
+    width: 40px;
+    height: 40px;
+  }
+  90% {
+    width: 70px;
+    height: 70px;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+span {
+  display: block;
+  position: absolute;
+  width: 20px;
+  border-radius: 50%;
+  height: 20px;
+  background: #1e90ff;
+}
+span:nth-child(2) {
+  right: 0px;
+}
+span:nth-child(3) {
+  right: 0px;
+  bottom: 0px;
+}
+span:nth-child(4) {
+  left: 0px;
+  bottom: 0px;
 }
