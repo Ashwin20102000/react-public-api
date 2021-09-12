@@ -4,7 +4,7 @@ import Load from './Load';
 export default function App() {
   const API = 'https://api.publicapis.org/entries';
   const [details, setState] = useState([]);
-  const [toggleBtn,setToggleBtn] = useState(true)
+  const [toggleBtn, setToggleBtn] = useState(true);
   useEffect(() => {
     fetch(API)
       .then(data => data.json())
@@ -15,11 +15,11 @@ export default function App() {
   });
   let uniqueCategories = [...new Set(Categories)];
   const [pagin, setPagin] = useState('LIST');
-  const btnName = !toggleBtn?'Select 🔓︎':'Close 🔒︎'
-  let color=!toggleBtn?'#42ba96':' #cf142b'
+  const btnName = !toggleBtn ? 'Select 🔓︎' : 'Close 🔒︎';
+  let color = !toggleBtn ? '#42ba96' : ' #cf142b';
   return (
     <div className="m-4 p-2">
-      <h1 style={{ textAlign: 'center' }}>API</h1>
+      <h1 style={{ textAlign: 'center' }}>Ashwin's Thunder Idea⚡️</h1>
       {uniqueCategories.length == 0 ? (
         <Load className="mt-4" />
       ) : (
@@ -28,27 +28,34 @@ export default function App() {
             className="bg-light text-dark border border-2 p-3 m-4"
             style={{ textAlign: 'center' }}
           >
-            Choose the Topic
+            Choose the Topic🎯
           </h3>
           <div className="d-flex justify-content-center">
-          <button style={{color:color}} onClick={()=>setToggleBtn(!toggleBtn)} className="btn btn-outline-info  mb-4 px-4">{btnName}</button>
-          <br />
+            <button
+              style={{ color: color }}
+              onClick={() => setToggleBtn(!toggleBtn)}
+              className="btn border-info  mb-4 px-4"
+            >
+              {btnName}
+            </button>
+            <br />
           </div>
-         
-          {toggleBtn && uniqueCategories.map(Category => {
-            return (
-              <>
-                <button
-                  className="btn text-dark btn-outline-info m-1"
-                  onClick={() => {
-                    setPagin(Category);
-                  }}
-                >
-                  {Category}
-                </button>
-              </>
-            );
-          })}
+
+          {toggleBtn &&
+            uniqueCategories.map(Category => {
+              return (
+                <>
+                  <button
+                    className="btn text-dark btn-outline-info m-1"
+                    onClick={() => {
+                      setPagin(Category);
+                    }}
+                  >
+                    {Category}
+                  </button>
+                </>
+              );
+            })}
           <div style={{ margin: '0% 10%' }} className="mt-5">
             <h2 className=" text-success p-3 bg-light">{pagin + ' ↓'}</h2>
             {pagin !== 'LIST' && (
