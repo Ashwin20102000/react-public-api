@@ -4,7 +4,7 @@ import Load from './Load';
 export default function App() {
   const API = 'https://api.publicapis.org/entries';
   const [details, setState] = useState([]);
-  const [toggleBtn, setToggleBtn] = useState(true);
+  const [toggleBtn, setToggleBtn] = useState(false);
   useEffect(() => {
     fetch(API)
       .then(data => data.json())
