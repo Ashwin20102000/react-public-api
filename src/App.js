@@ -4,6 +4,7 @@ import Load from './Load';
 export default function App() {
   const API = 'https://api.publicapis.org/entries';
   const [details, setState] = useState([]);
+  const [toggleBtn,setToggleBtn] = useState(true)
   useEffect(() => {
     fetch(API)
       .then(data => data.json())
@@ -14,6 +15,8 @@ export default function App() {
   });
   let uniqueCategories = [...new Set(Categories)];
   const [pagin, setPagin] = useState('LIST');
+  const btnName = !toggleBtn?'Select 🔓︎':'Close 🔒︎'
+  let color=!toggleBtn?'#42ba96':' #cf142b'
   return (
     <div className="m-4 p-2">
       <h1 style={{ textAlign: 'center' }}>API</h1>
@@ -27,7 +30,12 @@ export default function App() {
           >
             Choose the Topic
           </h3>
-          {uniqueCategories.map(Category => {
+          <div className="d-flex justify-content-center">
+          <button style={{color:color}} onClick={()=>setToggleBtn(!toggleBtn)} className="btn btn-outline-info  mb-4 px-4">{btnName}</button>
+          <br />
+          </div>
+         
+          {toggleBtn && uniqueCategories.map(Category => {
             return (
               <>
                 <button
