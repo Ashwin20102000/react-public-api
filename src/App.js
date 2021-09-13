@@ -49,6 +49,7 @@ export default function App() {
                     className="btn text-dark btn-outline-info m-1"
                     onClick={() => {
                       setPagin(Category);
+                      setToggleBtn(!toggleBtn);
                     }}
                   >
                     {Category}
