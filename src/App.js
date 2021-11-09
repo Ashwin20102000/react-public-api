@@ -28,7 +28,7 @@ export default function App() {
             className="bg-light text-dark border border-2 p-3 m-4"
             style={{ textAlign: 'center' }}
           >
-            Choose the Topic🎯
+            Choose the Topic
           </h3>
           <div className="d-flex justify-content-center">
             <button
